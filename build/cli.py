@@ -6,7 +6,7 @@ def createParser():
     
     addParser = subparsers.add_parser("add", help="Add a new task")
     addParser.add_argument("description", help="Add a task description")
-    addParser.add_argument("priority", help="Task priority")
+    addParser.add_argument("priority", type=int, help="Task priority")
 
     listParser = subparsers.add_parser("list", help="List all existing tasks")
     runParser = subparsers.add_parser("run", help="Run tasks")

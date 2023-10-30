@@ -10,3 +10,4 @@ class TaskManager:
     def listTasks(self):
         for priority, description in self.tasks.queue:
             print(f"Priority: {abs(priority)}, Description: {description}")
+            return self.tasks
