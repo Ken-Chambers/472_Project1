@@ -9,11 +9,7 @@ def createParser():
     addParser.add_argument("priority", help="Task priority")
 
     listParser = subparsers.add_parser("list", help="List all existing tasks")
-    
     runParser = subparsers.add_parser("run", help="Run tasks")
-    parser.add_argument("list", help="List current task")
-
-
     return parser
 
 def main():

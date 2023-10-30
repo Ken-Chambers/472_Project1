@@ -6,9 +6,6 @@ def main():
     parser = createParser()
     args = parser.parse_args()
 
-    task_manager = TaskManager()
-    thread_manager = ThreadManager(task_manager)
-
     if args.command == "add":
         task_description = args.description
         task_priority = args.priority
@@ -22,5 +19,8 @@ def main():
     else:
         print("Invalid command. Use 'add', 'list', 'run', or 'exit'.")
 
-main()
 
+
+task_manager = TaskManager()
+thread_manager = ThreadManager(task_manager)
+main()
