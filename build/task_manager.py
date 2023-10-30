@@ -8,6 +8,8 @@ class TaskManager:
         self.tasks.put((-prior, desc))
 
     def listTasks(self):
-        for priority, description in self.tasks.queue:
-            print(f"Priority: {abs(priority)}, Description: {description}")
-            return self.tasks
+        tasks = []
+        while not self.tasks.empty():
+            description, priortiy = self.tasks.get()
+            tasks.append(description, priortiy)
+        return self.tasks
