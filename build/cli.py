@@ -2,10 +2,16 @@ import argparse
 
 def createParser():
     parser = argparse.ArgumentParser(description="Task Manager with Priority Queue")
-    parser.add_argument("add", help="Add a new task")
-    parser.add_argument("edit", help="Edit an existing task")
+    subparsers = parser.add_subparsers(dest="command", help="Available commands: ")
+    
+    addParser = subparsers.add_parser("add", help="Add a new task")
+    addParser.add_argument("description", help="Add a task description")
+    addParser.add_argument("priority", help="Task priority")
+
+    listParser = subparsers.add_parser("list", help="List all existing tasks")
+    
+    runParser = subparsers.add_parser("run", help="Run tasks")
     parser.add_argument("list", help="List current task")
-    parser.add_argument("run", help="Run a new task")
 
 
     return parser
