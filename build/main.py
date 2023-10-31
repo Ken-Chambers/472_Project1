@@ -1,37 +1,51 @@
-from cli import createParser, main as cli_main
-from task_manager import TaskManager
-from thread_manager import ThreadManager
-
-task_manager = TaskManager()
-thread_manager = ThreadManager(task_manager)
+import argparse
+from process_manager import ProcessManager
 
 def main():
-    parser = createParser()
+    parser = argparse.ArgumentParser(description="Command Line Process Manager")
+    parser.add_argument("action", choices=["create", "list", "terminate", "monitor", "create_thread", "list_threads", "terminate_thread"])
+    parser.add_argument("--pid", type=int, help="Process ID")
+    parser.add_argument("--tid", type=int, help="Thread ID")
+    parser.add_argument("--data", help="Data for IPC")
+
     args = parser.parse_args()
 
-    if args.command == "add":
-        task_description = args.description
-        task_priority = args.priority
-        task_manager.addTask(task_description, task_priority)
-        print(f"Task '{task_description}' with priority {task_priority} has been added.")
+    manager = ProcessManager()
 
-    elif args.command == "list":
-        tasks = task_manager.listTasks()
-        if tasks:
-            print("Tasks: ")
-            for description, priority in tasks:
-                print(f"Description: {description}, Priority: {priority}")
+    if args.action == "create":
+        process_id = manager.create_process()
+        print(f"Process created with PID: {process_id}")
+
+    elif args.action == "list":
+        manager.list_processes()
+
+    elif args.action == "terminate":
+        if args.pid:
+            manager.terminate_process(args.pid)
+        elif args.tid:
+            manager.terminate_thread(args.tid)
+
+    elif args.action == "monitor":
+        if args.pid:
+            manager.monitor_process(args.pid)
+
+    # Thread operations
+    elif args.action == "create_thread":
+        if args.pid:
+            manager.create_thread(args.pid)
+            print("Thread created.")
         else:
-            print("No tasks to print, try adding a task first")
-        print("All tasks listed")
+            print("Please provide a PID for creating a thread.")
 
-    elif args.command == "run":
-        thread_manager.runTasks()
-    elif args.command == "exit":
-        thread_manager.stopThreads()
-    else:
-        print("Invalid command. Use 'add', 'list', 'run', or 'exit'.")
+    elif args.action == "list_threads":
+        if args.pid:
+            manager.list_threads(args.pid)
+        else:
+            print("Please provide a PID to list threads for.")
 
+    elif args.action == "terminate_thread":
+        if args.tid:
+            manager.terminate_thread(args.tid)
 
-
-main()
+if __name__ == "__main__":
+    main()
