@@ -14,22 +14,22 @@ This project aims to design and implement an advanced Process Manager with a foc
 
 - **Inter-Process Communication (IPC):** Implement IPC mechanisms to allow processes and threads to communicate and share data using methods like message passing, shared memory, or pipes.
 
-- **Process Synchronization:** Implement synchronization primitives such as mutexes and semaphores, and demonstrate their use in solving common synchronization problems.
+- **Process Synchronization:** Implement synchronization via mutexes and semaphores, and demonstrate their use in solving common synchronization problems.
 
-- **Command-Line Interface (CLI):** Create a user-friendly interface for interacting with the Process Manager.
+- **Command-Line Interface:** Create a user-friendly interface for interacting with the Process Manager.
 
 - **Logging and Reporting:** Implement logging and reporting features to track and display the execution of processes and threads.
 
 ## Project Structure
 
-- **main.py:** Contains the command-line interface for interacting with the Process Manager.
+- **main.py:** Contains the command-line interface for interacting with the Process Manager, interact with it by opening the terminal.
 
 - **process_manager.py:** Implements the Process Manager class, providing process and thread management functionalities.
 
 ## Usage
 
-- Use the command-line interface in main.py to interact with the Process Manager:
-
+- Use the command-line interface in main.py to interact with the Process Manager via the terminal:
+- List of commands:
 ```bash
 python main.py create
 python main.py list
